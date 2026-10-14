@@ -1,0 +1,86 @@
+@startuml
+title ТОиР-Проф — реализованные варианты использования учебного проекта
+left to right direction
+skinparam backgroundColor #F5F8FC
+skinparam packageStyle rectangle
+skinparam defaultFontName Segoe UI
+actor "Пользователь\n{абстрактный}" as User
+actor "Администратор" as Admin
+actor "Инженер ТОиР" as Engineer
+actor "Мастер цеха" as Master
+actor "Член бригады" as Member
+actor "Руководитель" as Manager
+Admin --|> User
+Engineer --|> User
+Master --|> User
+Member --|> User
+Manager --|> User
+rectangle "ТОиР-Проф: Vue / WPF → FastAPI → SQL Server" {
+  usecase "Войти по email и паролю" as Login
+  usecase "Просмотреть доступное\nоборудование и заявки" as Read
+  usecase "Просмотреть историю статусов" as History
+  usecase "Просмотреть отчёт / аналитику\nпо выбранным фильтрам" as Reports
+  usecase "Экспортировать отчёт\nв PDF / XLSX / CSV" as Export
+  usecase "Вести оборудование,\nграфик ТО, заявки" as Operate
+  usecase "Вести справочники\nпо правам роли" as Directories
+  usecase "Назначить бригаду\nи изменить статус заявки" as Transition
+  usecase "Начать / приостановить /\nзавершить работу бригады" as Work
+  usecase "Списать / исправить / вернуть\nматериалы в рамках заявки" as Materials
+  usecase "Импортировать оборудование\nиз CSV / XLSX" as Import
+  usecase "Управлять пользователями,\nролями и паролями" as Users
+  usecase "Создать плановую заявку\nиз выбранного ТО" as FromSchedule
+  usecase "Проверить роль и область доступа" as RBAC
+}
+User --> Login
+User --> Read
+User --> History
+User --> Reports
+User --> Export
+Admin --> Operate
+Engineer --> Operate
+Master --> Operate
+Admin --> Directories
+Engineer --> Directories
+Master --> Directories
+Admin --> Transition
+Engineer --> Transition
+Master --> Transition
+Member --> Work
+Master --> Work
+Engineer --> FromSchedule
+Master --> FromSchedule
+Admin --> FromSchedule
+Admin --> Materials
+Master --> Materials
+Member --> Materials
+Admin --> Import
+Engineer --> Import
+Admin --> Users
+Operate ..> RBAC : <<include>>
+Read ..> RBAC : <<include>>
+Reports ..> RBAC : <<include>>
+Transition ..> RBAC : <<include>>
+Materials ..> RBAC : <<include>>
+Users ..> RBAC : <<include>>
+Work ..> RBAC : <<include>>
+FromSchedule ..> RBAC : <<include>>
+Export ..> Reports : <<extend>>\n[нажато «Экспорт»]
+FromSchedule ..> Operate : <<extend>>\n[в графике выбрано ТО]
+note bottom of RBAC
+  Мастер — оборудование и заявки своего цеха.
+  Член бригады — назначенные своей бригаде заявки.
+  Инженер не списывает материалы.
+  Руководитель читает, но не изменяет данные.
+  JWT привязан к серверной сессии; выход отзывает её.
+end note
+note bottom of Directories
+  Администратор/инженер: нормативные справочники.
+  Мастер: материалы и доступные бригады.
+  Конкретные возможности задаёт /api/meta.
+end note
+legend bottom left
+  Пять конкретных ролей. «Пользователь» — общий абстрактный актор, не шестая роль.
+  Все операции выполняются в области данных своей роли. Вход — предварительное условие.
+  Экспорт необязателен при просмотре отчёта; создание заявки необязательно при просмотре графика.
+endlegend
+@enduml

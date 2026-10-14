@@ -1,0 +1,137 @@
+%% Generated from SQL Server sys.* metadata. Fields are a key-field subset; metadata JSON includes all columns.
+erDiagram
+    direction LR
+    AuditLog {
+        bigint Id PK
+        int ActorId FK
+    }
+    ClientRequests {
+        int UserId PK, FK
+        varchar RequestKey PK
+    }
+    Equipment {
+        int Id PK
+        nvarchar Name
+        int WorkshopId FK
+        int EquipmentTypeId FK
+        nvarchar Status
+        int CreatedBy FK
+        int UpdatedBy FK
+    }
+    EquipmentStatusHistory {
+        bigint Id PK
+        int EquipmentId FK
+        int ChangedBy FK
+    }
+    EquipmentTypes {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+    }
+    MaintenanceNorms {
+        int EquipmentTypeId PK, FK
+        int MaintenanceTypeId PK, FK
+    }
+    MaintenanceSchedule {
+        int Id PK
+        int EquipmentId FK
+        int MaintenanceTypeId FK
+        datetime2 PlannedAt
+        nvarchar Status
+        int TeamId FK
+    }
+    MaintenanceTypes {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        int IntervalDays
+    }
+    Materials {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        decimal Stock
+        decimal UnitPrice
+        int SupplierId FK
+    }
+    RefreshTokens {
+        bigint Id PK
+        int UserId FK
+    }
+    Roles {
+        int Id PK
+        varchar Code
+        nvarchar Name
+    }
+    Suppliers {
+        int Id PK
+        nvarchar Name
+    }
+    Teams {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        int WorkshopId FK
+    }
+    Users {
+        int Id PK
+        int RoleId FK
+        int WorkshopId FK
+        int TeamId FK
+    }
+    WorkOrderMaterials {
+        int WorkOrderId PK, FK
+        int MaterialId PK, FK
+        decimal Quantity
+        decimal UnitPrice
+    }
+    WorkOrders {
+        int Id PK
+        nvarchar Number
+        int EquipmentId FK
+        int MaintenanceTypeId FK
+        int ScheduleId FK
+        int MasterId FK
+        int TeamId FK
+        nvarchar Status
+        datetime2 PlannedStart
+        datetime2 PlannedEnd
+    }
+    WorkOrderStatusHistory {
+        bigint Id PK
+        int WorkOrderId FK
+        int ChangedBy FK
+    }
+    Workshops {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+    }
+    Equipment |o..o{ EquipmentStatusHistory : "EquipmentId / DELETE SET_NULL"
+    Equipment ||..o{ MaintenanceSchedule : "EquipmentId"
+    Equipment ||..o{ WorkOrders : "EquipmentId"
+    EquipmentTypes |o..o{ Equipment : "EquipmentTypeId"
+    EquipmentTypes ||--o{ MaintenanceNorms : "EquipmentTypeId"
+    MaintenanceSchedule |o..o| WorkOrders : "ScheduleId"
+    MaintenanceTypes ||--o{ MaintenanceNorms : "MaintenanceTypeId"
+    MaintenanceTypes ||..o{ MaintenanceSchedule : "MaintenanceTypeId"
+    MaintenanceTypes |o..o{ WorkOrders : "MaintenanceTypeId"
+    Materials ||--o{ WorkOrderMaterials : "MaterialId"
+    Roles ||..o{ Users : "RoleId"
+    Suppliers |o..o{ Materials : "SupplierId"
+    Teams |o..o{ MaintenanceSchedule : "TeamId"
+    Teams |o..o{ Users : "TeamId"
+    Teams |o..o{ WorkOrders : "TeamId"
+    Users |o..o{ AuditLog : "ActorId"
+    Users ||--o{ ClientRequests : "UserId"
+    Users |o..o{ Equipment : "CreatedBy"
+    Users |o..o{ Equipment : "UpdatedBy"
+    Users |o..o{ EquipmentStatusHistory : "ChangedBy"
+    Users ||..o{ RefreshTokens : "UserId"
+    Users ||..o{ WorkOrders : "MasterId"
+    Users |o..o{ WorkOrderStatusHistory : "ChangedBy"
+    WorkOrders ||--o{ WorkOrderMaterials : "WorkOrderId / DELETE CASCADE"
+    WorkOrders |o..o{ WorkOrderStatusHistory : "WorkOrderId / DELETE SET_NULL"
+    Workshops ||..o{ Equipment : "WorkshopId"
+    Workshops |o..o{ Teams : "WorkshopId"
+    Workshops |o..o{ Users : "WorkshopId"

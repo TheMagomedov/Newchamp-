@@ -1,0 +1,67 @@
+%% Generated from SQL Server sys.* metadata. Fields are a key-field subset; metadata JSON includes all columns.
+erDiagram
+    direction LR
+    Equipment {
+        int Id PK
+        nvarchar Name
+        int WorkshopId FK
+        int EquipmentTypeId FK
+        nvarchar Status
+        int CreatedBy FK
+        int UpdatedBy FK
+    }
+    MaintenanceSchedule {
+        int Id PK
+        int EquipmentId FK
+        int MaintenanceTypeId FK
+        datetime2 PlannedAt
+        nvarchar Status
+        int TeamId FK
+    }
+    MaintenanceTypes {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        int IntervalDays
+    }
+    Materials {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        decimal Stock
+        decimal UnitPrice
+        int SupplierId FK
+    }
+    Teams {
+        int Id PK
+        nvarchar Code
+        nvarchar Name
+        int WorkshopId FK
+    }
+    WorkOrderMaterials {
+        int WorkOrderId PK, FK
+        int MaterialId PK, FK
+        decimal Quantity
+        decimal UnitPrice
+    }
+    WorkOrders {
+        int Id PK
+        nvarchar Number
+        int EquipmentId FK
+        int MaintenanceTypeId FK
+        int ScheduleId FK
+        int MasterId FK
+        int TeamId FK
+        nvarchar Status
+        datetime2 PlannedStart
+        datetime2 PlannedEnd
+    }
+    Equipment ||..o{ MaintenanceSchedule : "EquipmentId"
+    Equipment ||..o{ WorkOrders : "EquipmentId"
+    MaintenanceSchedule |o..o| WorkOrders : "ScheduleId"
+    MaintenanceTypes ||..o{ MaintenanceSchedule : "MaintenanceTypeId"
+    MaintenanceTypes |o..o{ WorkOrders : "MaintenanceTypeId"
+    Materials ||--o{ WorkOrderMaterials : "MaterialId"
+    Teams |o..o{ MaintenanceSchedule : "TeamId"
+    Teams |o..o{ WorkOrders : "TeamId"
+    WorkOrders ||--o{ WorkOrderMaterials : "WorkOrderId / DELETE CASCADE"

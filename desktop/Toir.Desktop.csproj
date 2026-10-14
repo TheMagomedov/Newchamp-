@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Toir.Desktop</AssemblyName>
+    <RootNamespace>Toir.Desktop</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup><Compile Remove="checks/**/*.cs"/><Compile Remove="checks-wpf/**/*.cs"/><Compile Remove="tests/**/*.cs"/></ItemGroup>
+</Project>

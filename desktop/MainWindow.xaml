@@ -1,0 +1,21 @@
+<Window x:Class="Toir.Desktop.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Style="{StaticResource {x:Type Window}}" Title="ТОиР-Проф — рабочее место" Width="1366" Height="768" MinWidth="900" MinHeight="480" WindowStartupLocation="CenterScreen">
+ <Grid>
+  <Grid.ColumnDefinitions><ColumnDefinition Width="218"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+  <Border Background="{StaticResource Navy}">
+   <DockPanel Margin="16,25,12,18">
+    <StackPanel DockPanel.Dock="Top" Margin="8,0,0,24"><TextBlock Text="ТОиР" Foreground="White" FontSize="31" FontWeight="Bold"/><TextBlock Text="ПРОФ / РАБОЧЕЕ МЕСТО" Foreground="#7CD9D4" FontSize="10" FontWeight="SemiBold" Margin="0,5,0,0"/></StackPanel>
+    <StackPanel DockPanel.Dock="Bottom"><TextBlock x:Name="IdentityText" Foreground="#D6E4ED" TextWrapping="Wrap" Margin="8,12"/><Button Content="Заблокировать" Click="Lock_Click" Background="#254359"/><Button Content="Выйти из учётной записи" Click="Logout_Click" Background="Transparent" Foreground="#9CB3C1" FontSize="11" Margin="0,7,0,0"/><TextBlock Text="Блокировка через 15 с бездействия" Foreground="#9CB3C1" FontSize="10" TextWrapping="Wrap" Margin="8,12,0,0"/></StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel x:Name="NavPanel"/></ScrollViewer>
+   </DockPanel>
+  </Border>
+  <Grid Grid.Column="1" Margin="28,25,28,18">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <Grid Margin="0,0,0,15"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock x:Name="Breadcrumb" Text="ТОиР / Главная" Foreground="#678194" FontSize="11"/><TextBlock x:Name="PageTitle" Text="Панель управления" FontSize="25" FontWeight="SemiBold" Margin="0,5,0,0"/></StackPanel><StackPanel Grid.Column="1"><TextBlock x:Name="HeaderIdentity" TextAlignment="Right" FontSize="11" Margin="0,0,8,7"/><WrapPanel HorizontalAlignment="Right"><Button x:Name="NotificationsButton" Content="● 0" Click="Notifications_Click" ToolTip="Уведомления" Padding="10,6"/><Button Content="Настройки" Click="Settings_Click" Padding="10,6"/><Button Content="Обновить" Click="Refresh_Click" ToolTip="F5" Padding="10,6"/></WrapPanel></StackPanel></Grid>
+   <Border Grid.Row="1" x:Name="NoticeBox" Visibility="Collapsed" Background="#FFF0D4" CornerRadius="6" Padding="13" Margin="0,0,0,14"><TextBlock x:Name="NoticeText" TextWrapping="Wrap" Foreground="#6F5113"/></Border>
+   <Grid Grid.Row="2" x:Name="ContentHost"/>
+   <DockPanel Grid.Row="3" Margin="0,12,0,0"><TextBlock x:Name="StatusText" Text="Подключение…" Foreground="#658091" FontSize="11" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/><Button x:Name="QueueButton" Content="Очередь: 0" Click="Queue_Click" Background="#DDE9ED" Foreground="#244E60" Padding="12,5" MinHeight="28" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="10,0,0,0"/></DockPanel>
+  </Grid>
+  <ProgressBar x:Name="BusyBar" Grid.Column="1" Height="3" VerticalAlignment="Top" IsIndeterminate="True" Visibility="Collapsed"/>
+  <Border x:Name="ToastBox" Grid.Column="1" Background="#12695B" CornerRadius="8" Padding="18,12" Margin="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed"><TextBlock x:Name="ToastText" Foreground="White"/></Border>
+ </Grid>
+</Window>

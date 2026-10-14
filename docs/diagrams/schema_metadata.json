@@ -1,0 +1,1287 @@
+{
+  "database": "ChampTraining_20261013",
+  "tables": [
+    {
+      "name": "AuditLog",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "bigint",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "ActorId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "Entity",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "EntityId",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Action",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "OldData",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "NewData",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "OccurredAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "ClientRequests",
+      "columns": [
+        {
+          "name": "UserId",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "RequestKey",
+          "type": "varchar",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Fingerprint",
+          "type": "char",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Response",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CreatedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Equipment",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "InventoryNumber",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Model",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "SerialNumber",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "WorkshopId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "EquipmentTypeId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "CommissionedOn",
+          "type": "date",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "StartedOn",
+          "type": "date",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "RetiredOn",
+          "type": "date",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Status",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Manufacturer",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "WarrantyUntil",
+          "type": "date",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "PassportUrl",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IsDeleted",
+          "type": "bit",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CreatedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "UpdatedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CreatedBy",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "UpdatedBy",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        }
+      ]
+    },
+    {
+      "name": "EquipmentStatusHistory",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "bigint",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "EquipmentId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "InventoryNumber",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "OldStatus",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "NewStatus",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ChangedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ChangedBy",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        }
+      ]
+    },
+    {
+      "name": "EquipmentTypes",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "MaintenanceNorms",
+      "columns": [
+        {
+          "name": "EquipmentTypeId",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "MaintenanceTypeId",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "MinimumHours",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "MaximumHours",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "MaintenanceSchedule",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "EquipmentId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "MaintenanceTypeId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "PlannedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Status",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "TeamId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "CancellationReason",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "MaintenanceTypes",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Description",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IntervalKind",
+          "type": "varchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IntervalDays",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IntervalHours",
+          "type": "decimal",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "PlannedHours",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "RequiresStop",
+          "type": "bit",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IsActive",
+          "type": "bit",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Materials",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Unit",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Stock",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "MinimumStock",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Location",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "UnitPrice",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "SupplierId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        }
+      ]
+    },
+    {
+      "name": "RefreshTokens",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "bigint",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "UserId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "TokenHash",
+          "type": "binary",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CreatedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ExpiresAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "RevokedAt",
+          "type": "datetime2",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "varchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Suppliers",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Phone",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Teams",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Specialization",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "WorkshopId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "IsActive",
+          "type": "bit",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Email",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Phone",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "LastName",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "FirstName",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Patronymic",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "PasswordHash",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "RoleId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "WorkshopId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "TeamId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "RegisteredAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "IsActive",
+          "type": "bit",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "WorkOrderMaterials",
+      "columns": [
+        {
+          "name": "WorkOrderId",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "MaterialId",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "Quantity",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "UnitPrice",
+          "type": "decimal",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "RecordedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Comment",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "WorkOrders",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "SequenceNumber",
+          "type": "bigint",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CreatedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Number",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "EquipmentId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "MaintenanceTypeId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "ScheduleId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "MasterId",
+          "type": "int",
+          "nullable": false,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "TeamId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "Type",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Priority",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Status",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Description",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "FailureReason",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "PlannedStart",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "PlannedEnd",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ActualStart",
+          "type": "datetime2",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ActualEnd",
+          "type": "datetime2",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "CompletionReport",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Version",
+          "type": "timestamp",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    },
+    {
+      "name": "WorkOrderStatusHistory",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "bigint",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "WorkOrderId",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "WorkOrderNumber",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "OldStatus",
+          "type": "nvarchar",
+          "nullable": true,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "NewStatus",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ChangedAt",
+          "type": "datetime2",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "ChangedBy",
+          "type": "int",
+          "nullable": true,
+          "pk": false,
+          "fk": true
+        }
+      ]
+    },
+    {
+      "name": "Workshops",
+      "columns": [
+        {
+          "name": "Id",
+          "type": "int",
+          "nullable": false,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "Code",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "Name",
+          "type": "nvarchar",
+          "nullable": false,
+          "pk": false,
+          "fk": false
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "parent": "Equipment",
+      "child": "EquipmentStatusHistory",
+      "columnName": "EquipmentId",
+      "nullable": true,
+      "deleteAction": "SET_NULL",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Equipment",
+      "child": "MaintenanceSchedule",
+      "columnName": "EquipmentId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Equipment",
+      "child": "WorkOrders",
+      "columnName": "EquipmentId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "EquipmentTypes",
+      "child": "Equipment",
+      "columnName": "EquipmentTypeId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "EquipmentTypes",
+      "child": "MaintenanceNorms",
+      "columnName": "EquipmentTypeId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "MaintenanceSchedule",
+      "child": "WorkOrders",
+      "columnName": "ScheduleId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": true
+    },
+    {
+      "parent": "MaintenanceTypes",
+      "child": "MaintenanceNorms",
+      "columnName": "MaintenanceTypeId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "MaintenanceTypes",
+      "child": "MaintenanceSchedule",
+      "columnName": "MaintenanceTypeId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "MaintenanceTypes",
+      "child": "WorkOrders",
+      "columnName": "MaintenanceTypeId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Materials",
+      "child": "WorkOrderMaterials",
+      "columnName": "MaterialId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Roles",
+      "child": "Users",
+      "columnName": "RoleId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Suppliers",
+      "child": "Materials",
+      "columnName": "SupplierId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Teams",
+      "child": "MaintenanceSchedule",
+      "columnName": "TeamId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Teams",
+      "child": "Users",
+      "columnName": "TeamId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Teams",
+      "child": "WorkOrders",
+      "columnName": "TeamId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "AuditLog",
+      "columnName": "ActorId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "ClientRequests",
+      "columnName": "UserId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "Equipment",
+      "columnName": "CreatedBy",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "Equipment",
+      "columnName": "UpdatedBy",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "EquipmentStatusHistory",
+      "columnName": "ChangedBy",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "RefreshTokens",
+      "columnName": "UserId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "WorkOrders",
+      "columnName": "MasterId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Users",
+      "child": "WorkOrderStatusHistory",
+      "columnName": "ChangedBy",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "WorkOrders",
+      "child": "WorkOrderMaterials",
+      "columnName": "WorkOrderId",
+      "nullable": false,
+      "deleteAction": "CASCADE",
+      "uniqueChild": false
+    },
+    {
+      "parent": "WorkOrders",
+      "child": "WorkOrderStatusHistory",
+      "columnName": "WorkOrderId",
+      "nullable": true,
+      "deleteAction": "SET_NULL",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Workshops",
+      "child": "Equipment",
+      "columnName": "WorkshopId",
+      "nullable": false,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Workshops",
+      "child": "Teams",
+      "columnName": "WorkshopId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    },
+    {
+      "parent": "Workshops",
+      "child": "Users",
+      "columnName": "WorkshopId",
+      "nullable": true,
+      "deleteAction": "NO_ACTION",
+      "uniqueChild": false
+    }
+  ]
+}

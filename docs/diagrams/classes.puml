@@ -1,0 +1,174 @@
+@startuml
+title ТОиР-Проф — UML-модель предметной области
+!pragma layout smetana
+skinparam backgroundColor #F5F8FC
+skinparam defaultFontName Segoe UI
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype polyline
+hide empty methods
+left to right direction
+
+package "Пользователи и производство" {
+  class Role {
+    +Id : int
+    +Code : string
+    +Name : string
+  }
+  class Workshop {
+    +Id : int
+    +Code : string
+    +Name : string
+  }
+  class Team {
+    +Id : int
+    +Code : string
+    +Name : string
+    +Specialization : string
+    +IsActive : bool
+  }
+  class User {
+    +Id : int
+    +Email : string
+    +Phone : string
+    +LastName : string
+    +FirstName : string
+    +Patronymic : string [0..1]
+    -PasswordHash : string
+    +RegisteredAt : DateTime
+    +IsActive : bool
+  }
+}
+package "Парк и планирование" {
+  class EquipmentType {
+    +Id : int
+    +Code : string
+    +Name : string
+  }
+  class Equipment {
+    +Id : int
+    +InventoryNumber : string
+    +Name : string
+    +Model : string
+    +SerialNumber : string [0..1]
+    +CommissionedOn : Date
+    +StartedOn : Date
+    +RetiredOn : Date [0..1]
+    +Status : string
+    +Manufacturer : string [0..1]
+    +WarrantyUntil : Date [0..1]
+    +PassportUrl : string [0..1]
+    +IsDeleted : bool
+  }
+  class MaintenanceType {
+    +Id : int
+    +Code : string
+    +Name : string
+    +Description : string
+    +IntervalKind : days | hours | condition
+    +IntervalDays : int [0..1]
+    +IntervalHours : decimal [0..1]
+    +PlannedHours : decimal
+    +RequiresStop : bool
+    +IsActive : bool
+  }
+  class MaintenanceNorm {
+    +MinimumHours : decimal
+    +MaximumHours : decimal
+  }
+  class MaintenanceSchedule {
+    +Id : int
+    +PlannedAt : DateTime
+    +Status : string
+    +CancellationReason : string [0..1]
+  }
+}
+package "Выполнение и склад" {
+  class WorkOrder {
+    +Id : int
+    +Number : string {readOnly}
+    +CreatedAt : DateTime
+    +Type : string
+    +Priority : string
+    +Status : string
+    +Description : string
+    +FailureReason : string [0..1]
+    +PlannedStart : DateTime
+    +PlannedEnd : DateTime
+    +ActualStart : DateTime [0..1]
+    +ActualEnd : DateTime [0..1]
+    +CompletionReport : string [0..1]
+    +Version : byte[] {readOnly}
+  }
+  class Material {
+    +Id : int
+    +Code : string
+    +Name : string
+    +Unit : string
+    +Stock : decimal
+    +MinimumStock : decimal
+    +Location : string [0..1]
+    +UnitPrice : decimal
+  }
+  class Supplier {
+    +Id : int
+    +Name : string
+    +Phone : string [0..1]
+  }
+  class WorkOrderMaterial {
+    +Quantity : decimal
+    +UnitPrice : decimal {historical}
+    +RecordedAt : DateTime
+    +Comment : string [0..1]
+  }
+}
+package "История" {
+  class EquipmentStatusHistory {
+    +Id : long
+    +InventoryNumber : string
+    +OldStatus : string [0..1]
+    +NewStatus : string
+    +ChangedAt : DateTime
+  }
+  class WorkOrderStatusHistory {
+    +Id : long
+    +WorkOrderNumber : string
+    +OldStatus : string [0..1]
+    +NewStatus : string
+    +ChangedAt : DateTime
+  }
+}
+
+Role "1" -- "0..*" User : роль
+Workshop "0..1" -- "0..*" User : цех пользователя
+Workshop "0..1" -- "0..*" Team : закрепление
+Team "0..1" -- "0..*" User : участники
+Workshop "1" -- "0..*" Equipment
+EquipmentType "0..1" -- "0..*" Equipment
+EquipmentType "1" -- "0..*" MaintenanceNorm
+MaintenanceType "1" -- "0..*" MaintenanceNorm
+Equipment "1" -- "0..*" MaintenanceSchedule
+MaintenanceType "1" -- "0..*" MaintenanceSchedule
+Team "0..1" -- "0..*" MaintenanceSchedule
+Equipment "1" -- "0..*" WorkOrder
+MaintenanceType "0..1" -- "0..*" WorkOrder
+MaintenanceSchedule "0..1" -- "0..1" WorkOrder
+User "1" -- "0..*" WorkOrder : ответственный мастер
+Team "0..1" -- "0..*" WorkOrder : исполнитель
+WorkOrder "1" *-- "0..*" WorkOrderMaterial : строки расхода
+Material "1" -- "0..*" WorkOrderMaterial
+Supplier "0..1" -- "0..*" Material
+Equipment "0..1" -- "0..*" EquipmentStatusHistory
+WorkOrder "0..1" -- "0..*" WorkOrderStatusHistory
+User "0..1" -- "0..*" EquipmentStatusHistory : автор изменения
+User "0..1" -- "0..*" WorkOrderStatusHistory : автор изменения
+
+legend bottom left
+  Это логическая модель домена, не утверждение о наличии ORM-классов.
+  Python использует SQLAlchemy Core и словари. Связи реализованы внешними ключами.
+  [0..1] — необязательное значение. Кратность у конца связи относится к этому концу.
+  WorkOrderMaterial: ключ (заявка, материал); MaintenanceNorm: ключ (тип оборудования, тип ТО).
+  История переживает удаление объекта (ON DELETE SET NULL), поэтому не композиция.
+  Инфраструктура сессий, повторов, аудита и служебные FK — на полной ER-схеме schema_full.svg.
+endlegend
+@enduml
